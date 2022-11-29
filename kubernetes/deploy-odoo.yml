@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo
+  labels:
+    app: odoo
+    environment: production
+  namespace: icgroup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: odoo
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: odoo
+        tier: frontend
+    spec:
+      containers:
+      - image: odoo:13.0
+        name: odoo
+        env:
+        - name: POSTGRES_DB
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: POSTGRES_PASSWORD
+        ports:
+        - containerPort: 8069
+          name: odoo
+        volumeMounts:
+        - name: odoo-storage
+          mountPath: /var/lib/odoo
+      volumes:
+        - name: odoo-storage
+          hostPath:
+            path: odoo-web-data
