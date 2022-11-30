@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
     config.vm.define "minikube" do |minikube|
       minikube.vm.box = "geerlingguy/centos7"
-      minikube.vm.network "private_network", type: "dhcp"
+      minikube.vm.network "public_network", type: "dhcp"
       minikube.vm.hostname = "minikube-ic-webapp"
       minikube.vm.provider "virtualbox" do |v|
         v.name = "minikube-ic-webapp"

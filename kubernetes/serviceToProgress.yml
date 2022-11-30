@@ -7,9 +7,9 @@ metadata:
     environment: production
   namespace: icgroup
 spec:
-  clusterIP: None
+  type: ClusterIP
   selector:
-    app: postgres
+    app: odoo
     tier: postgres
   ports:
     - protocol: TCP
