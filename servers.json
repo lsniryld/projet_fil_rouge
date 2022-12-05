@@ -1,0 +1,11 @@
+"Servers": {
+    "1": {
+        "Name": "Minimally defined server",
+        "Group": "Server group",
+        "Port": 5432,
+        "Username": "postgres",
+        "Host": "localhost",
+        "SSLMode": "prefer",
+        "MaintenanceDB": "posstgres"
+    }
+}
