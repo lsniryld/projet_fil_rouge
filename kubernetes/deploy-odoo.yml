@@ -7,7 +7,7 @@ metadata:
     environment: production
   namespace: icgroup
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: odoo
@@ -45,11 +45,11 @@ spec:
           mountPath: /mnt/extra-addons
       volumes:
         - name: odoo-storage
-          hostPath:
-            path: odoo-web-data
+          persistentVolumeClaim:
+            claimName: odoo-pvc
         - name: odoo-persistent-storage
           hostPath:
-            path: odoo-extra-addons
-        - name: odoo-storage
+            path: /data/odoo-config
+        - name: odoo-extra-addons
           hostPath:
-            path: odoo-web-data
+            path: /data/odoo-addons

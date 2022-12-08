@@ -11,8 +11,6 @@ spec:
   selector:
     matchLabels:
       app: pgadmin
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -30,17 +28,21 @@ spec:
               name: secretpgadmin
               key: PGADMIN_DEFAULT_PASSWORD
         ports:
-        - containerPort: 5454
+        - containerPort: 5050
           name: pgadmin
         volumeMounts:
         - name: pgadmin-server
           mountPath: /pgadmin4/servers.json
+          subPath: servers.json
         - name: pgadmin-data
           mountPath: /var/lib/pgadmin
       volumes:
         - name: pgadmin-server
-          hostPath:
-            path: /pgadmin4/servers.json
+          configMap:
+          name: pgadmin-config
+          items:
+          - key: servers.json
+            path: servers.json 
         - name: pgadmin-data
           persistentVolumeClaim:
             claimName: pgadmin-pvc
