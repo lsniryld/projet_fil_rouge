@@ -39,10 +39,10 @@ spec:
       volumes:
         - name: pgadmin-server
           configMap:
-          name: pgadmin-config
-          items:
-          - key: servers.json
-            path: servers.json 
+            name: pgadmin-config
+            items:
+            - key: servers.json
+              path: servers.json 
         - name: pgadmin-data
           persistentVolumeClaim:
             claimName: pgadmin-pvc

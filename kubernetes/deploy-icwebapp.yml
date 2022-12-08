@@ -17,7 +17,7 @@ spec:
         app: icwebapp
     spec:
       containers:
-      - image: lsniryniry/icwebapp:1.0
+      - image: lsniryniry/ic-webapp:1.0
         name: icwebapp
         env:
         - name: ODOO_URL

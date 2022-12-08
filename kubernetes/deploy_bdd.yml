@@ -21,9 +21,6 @@ spec:
           image: postgres:10
           ports:
             - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: postgres-config
           env:
           - name: POSTGRES_DB
             value: postgres
@@ -39,5 +36,5 @@ spec:
               name: postgredb
       volumes:
         - name: postgredb
-          persistentVolumeClaim:
-            claimName: postgres-pv-claim
+          hostPath:
+            path: /data/postgresdb
