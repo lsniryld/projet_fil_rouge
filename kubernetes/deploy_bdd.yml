@@ -4,23 +4,21 @@ metadata:
   name: postgres
   namespace: icgroup
   labels:
-    app: odoo
+    app: postgres
     environment: production  
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: odoo
-      tier: postgres
+      app: postgres
   template:
     metadata:
       labels:
-        app: odoo
-        tier: postgres
+        app: postgres
     spec:
       containers:
         - name: postgres
-          image: postgres:10.1
+          image: postgres:10
           ports:
             - containerPort: 5432
           envFrom:

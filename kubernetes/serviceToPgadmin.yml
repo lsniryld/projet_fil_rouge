@@ -1,18 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: odoosvc
+  name: pgadminsvc
   labels:
-    name: odoo
+    name: pgadmin
     environment: production
   namespace: icgroup
 spec:
   Type: NodePort
   selector:
-    app: odoo
-    tier: frontend
+    app: pgadmin
   ports:
     - protocol: TCP
-      port: 8069
-      targetPort: 8069
-      nodePort: 30069
+      port: 5050
+      targetPort: 50
+      nodePort: 30050

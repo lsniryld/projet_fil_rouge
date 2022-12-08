@@ -39,7 +39,17 @@ spec:
         volumeMounts:
         - name: odoo-storage
           mountPath: /var/lib/odoo
+        - name: odoo-persistent-storage
+          mountPath: /etc/odoo
+        - name: odoo-extra-addons
+          mountPath: /mnt/extra-addons
       volumes:
+        - name: odoo-storage
+          hostPath:
+            path: odoo-web-data
+        - name: odoo-persistent-storage
+          hostPath:
+            path: odoo-extra-addons
         - name: odoo-storage
           hostPath:
             path: odoo-web-data

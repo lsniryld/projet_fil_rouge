@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icwebapp
+  labels:
+    app: icwebapp
+    environment: production
+  namespace: icgroup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: icwebapp
+  template:
+    metadata:
+      labels:
+        app: icwebapp
+    spec:
+      containers:
+      - image: lsniryniry/icwebapp:1.0
+        name: icwebapp
+        env:
+        - name: ODOO_URL
+          value: http://localhost:30069
+        - name: PGADMIN_URL
+          value: http://localhost:30050        
+        ports:
+        - containerPort: 8080
+          name: icwebapp
+        

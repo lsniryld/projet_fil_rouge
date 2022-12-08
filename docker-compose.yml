@@ -23,8 +23,8 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
-      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
@@ -36,7 +36,7 @@ services:
     ports:
       - 5454:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL = test_odoo@gmail.com"
+      - PGADMIN_DEFAULT_EMAIL = test_odoo@gmail.com
       - PGADMIN_DEFAULT_PASSWORD = postgres_passwd    
     networks:
       - odoo_network
@@ -45,12 +45,12 @@ services:
       - ${PWD}/servers.json:/pgadmin4/servers.json
   
   ic-webapp:
-    image: lsniryniry/ic-webapp
+    image: lsniryniry/ic-webapp:1.0
     ports:
       - 8080:8080
     environment:
       - ODOO_URL=http://localhost:8069   #ici c'est le meme port  dans le service odoo
-      - PGADMIN_URL=http://localhost:5432   #ici c'est le meme port  dans le service pgadmin
+      - PGADMIN_URL=http://localhost:5454   #ici c'est le meme port  dans le service pgadmin
     networks:
       - odoo_network
 

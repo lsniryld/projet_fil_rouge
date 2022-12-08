@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  labels:
+    app: pgadmin
+    environment: production
+  namespace: icgroup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - image: dpage/pgadmin4
+        name: pgadmin
+        env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: test_odoo@gmail.com
+        - name: PGADMIN_DEFAULT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secretpgadmin
+              key: PGADMIN_DEFAULT_PASSWORD
+        ports:
+        - containerPort: 5454
+          name: pgadmin
+        volumeMounts:
+        - name: pgadmin-server
+          mountPath: /pgadmin4/servers.json
+        - name: pgadmin-data
+          mountPath: /var/lib/pgadmin
+      volumes:
+        - name: pgadmin-server
+          hostPath:
+            path: /pgadmin4/servers.json
+        - name: pgadmin-data
+          persistentVolumeClaim:
+            claimName: pgadmin-pvc
