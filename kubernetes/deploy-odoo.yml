@@ -11,14 +11,10 @@ spec:
   selector:
     matchLabels:
       app: odoo
-      tier: frontend
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
         app: odoo
-        tier: frontend
     spec:
       containers:
       - image: odoo:13.0
@@ -35,7 +31,6 @@ spec:
               key: POSTGRES_PASSWORD
         ports:
         - containerPort: 8069
-          name: odoo
         volumeMounts:
         - name: odoo-storage
           mountPath: /var/lib/odoo
