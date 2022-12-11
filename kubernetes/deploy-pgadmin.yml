@@ -28,7 +28,7 @@ spec:
               name: secretpgadmin
               key: PGADMIN_DEFAULT_PASSWORD
         ports:
-        - containerPort: 5050
+        - containerPort: 80 #5050
           name: pgadmin
         volumeMounts:
         - name: pgadmin-server
