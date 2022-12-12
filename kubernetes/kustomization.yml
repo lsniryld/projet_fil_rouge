@@ -1,0 +1,19 @@
+resources:
+  - namespace.yml
+  - secret.yml
+  - secretpgadmin.yml
+  - pv-odoo.yml
+  - pvc-odoo.yml
+  - pv-postgres.yml
+  - pvc-postgres.yml
+  - pv-pgadmin.yml
+  - pvc-pgadmin.yml
+  - serviceToOdoo.yml
+  - serviceToPostgres.yml
+  - serviceToPgadmin.yml
+  - serviceToIcwebapp.yml
+  - configmap-pgadmin.yml
+  - deploy_bdd.yml
+  - deploy-odoo.yml
+  - deploy-pgadmin.yml
+  - deploy-icwebapp.yml
