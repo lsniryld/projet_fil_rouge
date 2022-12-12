@@ -20,11 +20,11 @@ spec:
       - image: odoo:13.0
         name: odoo
         env:
-        - name: POSTGRES_DB
+        - name: HOST
           value: postgres
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
+        - name: USER
+          value: odoo
+        - name: PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysecret
