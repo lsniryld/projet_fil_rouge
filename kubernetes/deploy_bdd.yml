@@ -27,10 +27,7 @@ spec:
           - name: POSTGRES_USER
             value: odoo
           - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: POSTGRES_PASSWORD
+            value: test
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb

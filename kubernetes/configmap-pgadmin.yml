@@ -15,7 +15,7 @@ data:
             "Host": "postgres",
             "Port": "5432" ,
             "MaintenanceDB": "postgres",
-            "Username": "odoo_user",
+            "Username": "odoo",
             "SSLMode": "prefer"
           }
         }
