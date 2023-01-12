@@ -57,7 +57,7 @@ pipeline {
               }
            }
        }
-       /*stage('Clean container') {
+       stage('Clean container') {
           agent any
           steps {
              script {
@@ -67,7 +67,7 @@ pipeline {
                '''
              }
           }
-        }*/
+        }
 
        stage ('Login and Push Image on docker hub') {
           agent any
@@ -78,7 +78,8 @@ pipeline {
              script {
                sh '''
                    echo "envoi docker hub"
-		   
+		   echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_ID --password-stdin
+                   docker push ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG
                '''
              }
           }
