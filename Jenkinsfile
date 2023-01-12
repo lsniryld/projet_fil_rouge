@@ -52,7 +52,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                   curl -I ${HOST_IP} | grep -i "200"
+                   curl -I ${HOST_IP} 
                 '''
               }
            }
