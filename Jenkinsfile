@@ -1,7 +1,7 @@
 pipeline {
     environment {
         IMAGE_NAME = "icwebapp"
-        APP_CONTAINER_PORT = "8081"
+        APP_CONTAINER_PORT = "80"
         DOCKERHUB_ID = "lsniryniry"
         DOCKERHUB_PASSWORD = credentials('dockerhub_password')
 	IMAGE_TAG= "v1"
