@@ -4,6 +4,7 @@ pipeline {
         APP_CONTAINER_PORT = "8080"
         DOCKERHUB_ID = "lsniryniry"
         DOCKERHUB_PASSWORD = credentials('dockerhub_password')
+	IMAGE_TAG= "v1"
 	    
     }
     agent none
