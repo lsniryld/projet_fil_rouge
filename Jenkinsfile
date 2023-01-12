@@ -3,7 +3,7 @@ pipeline {
         IMAGE_NAME = "icwebapp"
         APP_CONTAINER_PORT = "8080"
         DOCKERHUB_ID = "lsniryniry"
-        DOCKERHUB_PASSWORD = credentials('dockerhub_password')
+        //DOCKERHUB_PASSWORD = credentials('dockerhub_password')
 	IMAGE_TAG= "v1"
 	    
     }
@@ -71,6 +71,9 @@ pipeline {
 
        stage ('Login and Push Image on docker hub') {
           agent any
+	  environment {
+             DOCKERHUB_PASSWORD  = credentials('dockerhub_password')
+          } 
           steps {
              script {
                sh '''
