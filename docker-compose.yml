@@ -15,7 +15,7 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     networks:
-      - odoo_network
+      - icwebapp_network
 
   db:
     image: postgres:13
@@ -29,7 +29,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     networks:
-      - odoo_network
+      - icwebapp_network
   
   pgadmin:
     image: dpage/pgadmin4
@@ -39,7 +39,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL = test_odoo@gmail.com
       - PGADMIN_DEFAULT_PASSWORD = postgres_passwd    
     networks:
-      - odoo_network
+      - pgadmin_network
     volumes:
       - pgadmin-data:/var/lib/pgadmin
       - ${PWD}/servers.json:/pgadmin4/servers.json
@@ -50,9 +50,9 @@ services:
       - 8080:8080
     environment:
       - ODOO_URL=http://localhost:8069   #ici c'est le meme port  dans le service odoo
-      - PGADMIN_URL=http://localhost:5454   #ici c'est le meme port  dans le service pgadmin
+      - PGADMIN_URL=http://localhost:5432   #ici c'est le meme port  dans le service pgadmin
     networks:
-      - odoo_network
+      - icwebapp_network
 
 
 volumes:
@@ -61,4 +61,5 @@ volumes:
   pgadmin-data:
 
 networks:
-  odoo_network:
+  icwebapp_network:
+  pgadmin_network:
