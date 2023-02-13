@@ -7,6 +7,8 @@ services:
     container_name: ic-webapp
     environment:
       - ODOO_URL=http://${ADRESSE_IP}:8069   
-      - PGADMIN_URL=http://${ADRESSE_IP}:5050  
+      - PGADMIN_URL=http://${ADRESSE_IP}:5050
+    networks:
+      - network_icwebapp
 networks:
   - network_icwebapp

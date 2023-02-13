@@ -39,7 +39,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL = test_odoo@gmail.com
       - PGADMIN_DEFAULT_PASSWORD = postgres_passwd    
     networks:
-      - pgadmin_network
+      - icwebapp_network
     volumes:
       - pgadmin-data:/var/lib/pgadmin
       - ${PWD}/servers.json:/pgadmin4/servers.json
@@ -62,4 +62,3 @@ volumes:
 
 networks:
   icwebapp_network:
-  pgadmin_network:
