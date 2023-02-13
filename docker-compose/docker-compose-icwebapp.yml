@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  ic-webapp:
+    image: lsniryniry/ic-webapp:1.0
+    ports:
+      - 8080:8080
+    container_name: ic-webapp
+    environment:
+      - ODOO_URL=http://${ADRESSE_IP}:8069   
+      - PGADMIN_URL=http://${ADRESSE_IP}:5050  
+networks:
+  - network_icwebapp
