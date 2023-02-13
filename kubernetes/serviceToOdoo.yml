@@ -10,7 +10,6 @@ spec:
   type: NodePort
   selector:
     app: odoo
-    tier: frontend
   ports:
     - protocol: TCP
       port: 8069

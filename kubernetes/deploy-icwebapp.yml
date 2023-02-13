@@ -21,9 +21,9 @@ spec:
         name: icwebapp
         env:
         - name: ODOO_URL
-          value: http://192.168.43.44:30069
+          value: http://192.168.237.36:30069
         - name: PGADMIN_URL
-          value: http://192.168.43.44:30050        
+          value: http://192.168.237.36:30050        
         ports:
         - containerPort: 8080
           name: icwebapp
