@@ -3,7 +3,7 @@ services:
   web:
     image: odoo:13.0
     depends_on:
-      - db
+      - postgres
     ports:
       - 8069:8069
     environment:
@@ -17,14 +17,14 @@ services:
     networks:
       - icwebapp_network
 
-  db:
+  postgres:
     image: postgres:13
     ports:
       - 5432:5432
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
@@ -36,8 +36,8 @@ services:
     ports:
       - 5050:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL = test_odoo@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD = postgres_passwd    
+      - PGADMIN_DEFAULT_EMAIL=test_odoo@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres_passwd    
     networks:
       - icwebapp_network
     volumes:
