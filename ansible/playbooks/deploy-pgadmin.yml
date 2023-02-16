@@ -1,5 +1,5 @@
 ---
-- hosts: prod:dev
+- hosts: prod
   become: true
   roles:
-    - { role: role_pgadmin}
+    - role: "roles/role_pgadmin"

@@ -1,5 +1,6 @@
 ---
-- hosts: prod:dev
+- name: "install odoo"
+  hosts: prod
   become: true
   roles:
-    - { role: role_odoo}
+    - role: "ansible/roles/role_odoo"

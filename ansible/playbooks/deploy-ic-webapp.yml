@@ -1,7 +1,8 @@
 ---
-- hosts: prod:dev
+- name: "install icwebapp"
+  hosts: prod
   become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
   roles:
-    - { role: role_ic-webapp}
+    - role: "ansible/roles/role_ic-webapp"

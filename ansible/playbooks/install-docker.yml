@@ -1,6 +1,6 @@
 ---
-- hosts: prod:dev
+- hosts: prod
   become: true
   gather_facts: yes
   roles:
-    - { role: install-docker}
+    - role: "ansible/roles/install-docker"}"
