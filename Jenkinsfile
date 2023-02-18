@@ -71,11 +71,11 @@ pipeline {
           }
         }
 
-       stage ('Login and Push Image on docker hub') {
+       /*stage ('Login and Push Image on docker hub') {
          agent any
-	      /*environment {
+	      environment {
              DOCKERHUB_PASSWORD  = credentials('dockerhub_password')
-          } */
+          } 
           steps {
              script {
                sh '''
@@ -85,24 +85,41 @@ pipeline {
                '''
              }
           }
-        }
+        }*/
 
-        /*stage ('Prepare ansible environment') {
-          agent any
-          environment {
-            VAULT_KEY = credentials('vault_key')
-            PRIVATE_KEY = credentials('private_key')
-          }          
-          steps {
-             script {
-               sh '''
-                  echo $VAULT_KEY > vault.key
-                  echo $PRIVATE_KEY > id_rsa
-                  chmod 700 id_rsa vault.key
-               '''
-             }
-          }
-       }*/
+        stage('Deploy application ') {
+        agent { docker { image 'registry.gitlab.com/robconnolly/docker-ansible:latest'  } }
+        stages {
+	    stage ('Prepare ansible environment') {
+		  agent any
+		  environment {
+		    VAULT_KEY = credentials('vault_key')
+		    PRIVATE_KEY = credentials('private_key')
+		  }          
+		  steps {
+		     script {
+		       sh '''
+			  echo $VAULT_KEY > vault.key
+			  echo $PRIVATE_KEY > id_rsa
+			  chmod 700 id_rsa
+		       '''
+		     }
+          	}
+       	     }
+	
+            stage ("Ping hosts") {
+                steps {
+                    script {
+                        sh '''
+                            apt update -y
+                            apt install sshpass -y 
+                            export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                            ansible all --list-hosts --private-key id_rsa  
+                        '''
+                    }
+                }
+            }
+
 
     }
  
