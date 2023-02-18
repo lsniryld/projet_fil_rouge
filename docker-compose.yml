@@ -49,8 +49,8 @@ services:
     ports:
       - 8080:8080
     environment:
-      - ODOO_URL=http://localhost:8069   #ici c'est le meme port  dans le service odoo
-      - PGADMIN_URL=http://localhost:5432   #ici c'est le meme port  dans le service pgadmin
+      - ODOO_URL=http://${ADRESSE_IP}:8069   #ici c'est le meme port  dans le service odoo
+      - PGADMIN_URL=http://${ADRESSE_IP}:5050   #ici c'est le meme port  dans le service pgadmin
     networks:
       - icwebapp_network
 

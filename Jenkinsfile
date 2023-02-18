@@ -4,7 +4,9 @@ pipeline {
         APP_CONTAINER_PORT = "8080"
         DOCKERHUB_ID = "lsniryniry"
         //DOCKERHUB_PASSWORD = credentials('dockerhub_password')
-	IMAGE_TAG= "v1"
+	     IMAGE_TAG= "v1"
+        APP_EXPOSED_PORT="8081"
+        HOST_IP=192.168.237.40
 	    
     }
     agent none
@@ -52,7 +54,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                   curl -I ${HOST_IP} | grep "200"
+                   curl -I http://${HOST_IP}:${APP_EXPOSED_PORT} | grep "200"
                 '''
               }
            }
@@ -70,20 +72,37 @@ pipeline {
         }
 
        stage ('Login and Push Image on docker hub') {
-          agent any
-	  environment {
+         agent any
+	      environment {
              DOCKERHUB_PASSWORD  = credentials('dockerhub_password')
           } 
           steps {
              script {
                sh '''
                    echo "envoi docker hub"
-		   echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_ID --password-stdin
+		               echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_ID --password-stdin
                    docker push ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG
                '''
              }
           }
         }
+
+        /*stage ('Prepare ansible environment') {
+          agent any
+          environment {
+            VAULT_KEY = credentials('vault_key')
+            PRIVATE_KEY = credentials('private_key')
+          }          
+          steps {
+             script {
+               sh '''
+                  echo $VAULT_KEY > vault.key
+                  echo $PRIVATE_KEY > id_rsa
+                  chmod 700 id_rsa vault.key
+               '''
+             }
+          }
+       }*/
 
     }
  

@@ -1,5 +1,6 @@
 ---
-- hosts: prod
+- name: "install pgdadmin"
+  hosts: prod
   become: true
   roles:
-    - role: "roles/role_pgadmin"
+    - role: "ansible/roles/role_pgadmin"
