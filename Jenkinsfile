@@ -6,7 +6,7 @@ pipeline {
         //DOCKERHUB_PASSWORD = credentials('dockerhub_password')
 	     IMAGE_TAG= "v1"
         APP_EXPOSED_PORT="8081"
-        HOST_IP=192.168.237.40
+        HOST_IP="192.168.237.40"
 	    
     }
     agent none
