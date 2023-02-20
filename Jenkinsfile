@@ -120,6 +120,39 @@ pipeline {
 								}
 							}
 						}
+						
+						stage ("Deploy pgadmin") {
+							steps {
+								script {
+									sh '''
+                                    export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                                    ansible-playbook ansible/playbooks/deploy-pgadmin.yml --vault-password-file vault.key --private-key id_rsa -l pg_admin
+									'''
+								}
+							}
+						}
+						
+						stage ("Deploy odoo") {
+							steps {
+								script {
+									sh '''
+                                    export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                                    ansible-playbook ansible/playbooks/deploy-odoo.yml --vault-password-file vault.key --private-key id_rsa -l odoo
+									'''
+								}
+							}
+						}
+
+						stage ("Deploy ic-webapp") {
+							steps {
+								script {
+									sh '''
+                                    export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                                    ansible-playbook ansible/playbooks/deploy-ic-webapp.yml --vault-password-file vault.key --private-key id_rsa -l ic_webapp
+									'''
+								}
+							}
+						}
 					}
 			   }
 		   
