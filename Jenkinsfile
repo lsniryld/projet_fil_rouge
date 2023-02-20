@@ -61,48 +61,67 @@ pipeline {
 		stage('Deploy application ') {
 		   agent { docker { image 'registry.gitlab.com/robconnolly/docker-ansible:latest'  } }
 		   stages {
-		      stage ('Prepare ansible environment') {
-			     agent any
-                 environment {
-                    VAULT_KEY = credentials('vault_key')
-                    PRIVATE_KEY = credentials('private_key')
-                 }
-                  steps {
-                     script {
-                       sh '''
-                       echo $VAULT_KEY > vault.key
-                       echo $PRIVATE_KEY > id_rsa
-                       chmod 700 id_rsa
+				stage ('Prepare ansible environment') {
+					agent any
+					environment {
+						VAULT_KEY = credentials('vault_key')
+						PRIVATE_KEY = credentials('private_key')
+					}
+					steps {
+						script {
+							sh '''
+							echo $VAULT_KEY > vault.key
+							echo $PRIVATE_KEY > id_rsa
+							chmod 700 id_rsa
                        '''
-                     }      
-                  }				 
-			  }
+						}      
+					}				 
+				}
 			  
-			  stage ("Ping hosts") {
-                            steps {
-                              script {
-                                  sh '''
+				stage ("Ping hosts") {
+                    steps {
+                        script {
+                            sh '''
                             apt update -y
                             apt install sshpass -y 
                             export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
                             ansible all --list-hosts --private-key id_rsa  
-                        '''
-                    }
-                }
-            }
+							'''
+						}
+					}
+				}
 			   
-	                   stage ("Check all playbook syntax") {
-                steps {
-                    script {
-                        sh '''
-                            export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
-                            ansible-playbook ansible/playbooks/deploy-ic-webapp.yml --syntax-check -vvv
-                            /*ansible-lint -x 306 sources/ansible-ressources/playbooks/* || echo passing linter*/
-                            echo ${GIT_BRANCH}                                         
-                        '''
-                    }
-                }
-            }
+	            stage ("Check all playbook syntax") {
+					steps {
+						script {
+							sh '''
+								export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+								ansible-playbook ansible/playbooks/deploy-ic-webapp.yml --syntax-check -vvv
+								ansible-playbook ansible/playbooks/install-docker.yml --syntax-check -vvv
+								ansible-playbook ansible/playbooks/deploy-odoo.yml --syntax-check -vvv
+								ansible-playbook ansible/playbooks/deploy-pgadmin.yml --syntax-check -vvv
+								/*ansible-lint -x 306 sources/ansible-ressources/playbooks/* || echo passing linter*/
+								echo ${GIT_BRANCH}                                         
+							'''
+						}
+					}
+				}
+			   
+			   stage ("Deploy in PRODUCTION") {
+					when { expression { GIT_BRANCH == 'origin/main'} }
+					stages {
+						stage ("PRODUCTION - Install Docker on all hosts") {
+						    steps {
+								script {
+									sh '''
+										export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+										ansible-playbook ansible/playbooks/install-docker.yml --vault-password-file vault.key --private-key id_rsa -l odoo_server,pg_admin_server
+									'''
+								}
+							}
+						}
+					}
+			   }
 		   
         }
 		
