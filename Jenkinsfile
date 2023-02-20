@@ -99,8 +99,7 @@ pipeline {
 								ansible-playbook ansible/playbooks/deploy-ic-webapp.yml --syntax-check -vvv
 								ansible-playbook ansible/playbooks/install-docker.yml --syntax-check -vvv
 								ansible-playbook ansible/playbooks/deploy-odoo.yml --syntax-check -vvv
-								ansible-playbook ansible/playbooks/deploy-pgadmin.yml --syntax-check -vvv
-								/*ansible-lint -x 306 sources/ansible-ressources/playbooks/* || echo passing linter*/
+								ansible-playbook ansible/playbooks/deploy-pgadmin.yml --syntax-check -vvv								
 								echo ${GIT_BRANCH}                                         
 							'''
 						}
