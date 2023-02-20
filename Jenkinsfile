@@ -79,13 +79,26 @@ pipeline {
 			  }
 			  
 			  stage ("Ping hosts") {
-                steps {
-                    script {
-                        sh '''
+                            steps {
+                              script {
+                                  sh '''
                             apt update -y
                             apt install sshpass -y 
                             export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
                             ansible all --list-hosts --private-key id_rsa  
+                        '''
+                    }
+                }
+            }
+			   
+	                   stage ("Check all playbook syntax") {
+                steps {
+                    script {
+                        sh '''
+                            export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                            ansible-playbook ansible/playbooks/deploy-ic-webapp.yml --syntax-check -vvv
+                            /*ansible-lint -x 306 sources/ansible-ressources/playbooks/* || echo passing linter*/
+                            echo ${GIT_BRANCH}                                         
                         '''
                     }
                 }
