@@ -31,7 +31,7 @@ resource "aws_instance" "myec2" {
    }
 
    provisioner "local-exec" {
-     command = "echo PUBLIC IP: ${var.eip_output} ; ID: ${aws_instance.myec2.id} ; AZ: ${aws_instance.myec2.availability_zone}; >> ip_ec2.txt"
+     command = "echo IP: ${var.public_ip} >> /var/jenkins_home/workspace/${var.projet_name}/public_ip.txt"
    }
 
    root_block_device {

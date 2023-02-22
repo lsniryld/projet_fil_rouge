@@ -38,3 +38,8 @@ variable "zone_name" {
   description = "zone name"
   default     = "us-east-1"
 }
+
+variable "projet_name" {
+  type    = string
+  default = "projet_fil_rouge"
+}

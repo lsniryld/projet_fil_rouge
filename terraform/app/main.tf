@@ -1,7 +1,5 @@
 provider "aws" {
   region     = "us-east-1"
-  access_key = "change_access_key"
-  secret_key = "change_secret_key"
 }
 
 terraform {
@@ -9,8 +7,6 @@ terraform {
     bucket     = "terraform-backend-niry"
     key        = "niry-prod.tfstate"
     region     = "us-east-1"
-    access_key = "change_access_key"
-    secret_key = "change_secret_key"
   }
 }
 
