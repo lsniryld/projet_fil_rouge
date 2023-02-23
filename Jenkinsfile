@@ -85,7 +85,7 @@ pipeline {
                   chmod 700 devops.pem
                   cd "./terraform/app"
                   terraform init 
-                  terraform destroy --auto-approve
+                  #terraform destroy --auto-approve
                   terraform plan
                   terraform apply --auto-approve
                '''
