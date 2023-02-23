@@ -4,7 +4,7 @@ pipeline {
         APP_CONTAINER_PORT = "8080"
         DOCKERHUB_ID = "lsniryniry"
         DOCKERHUB_PASSWORD = credentials('dockerhub_password')
-	IMAGE_TAG= "v1"
+	      IMAGE_TAG= "v1"
         APP_EXPOSED_PORT="8081"
         HOST_IP="192.168.237.40"
 	    
@@ -85,7 +85,7 @@ pipeline {
                   chmod 700 devops.pem
                   cd "./terraform/app"
                   terraform init 
-                  #terraform destroy --auto-approve
+                  terraform destroy --auto-approve
                   terraform plan
                   terraform apply --auto-approve
                '''
