@@ -18,10 +18,6 @@ variable "aws_common_tag" {
   }
 }
 
-variable "ubuntu_account_number" {
-  default = "099720109477"
-}
-
 variable "name_maintainer" {
   type        = string
   description = "name of the maintainer"

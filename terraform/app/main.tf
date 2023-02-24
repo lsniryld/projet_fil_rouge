@@ -25,7 +25,6 @@ module "ec2" {
     Name = "ec2-niry"
   }
   sgname = module.sg.sg_name_output
-  zone_name = "us-east-1e"
   eip_output = module.eip.eip_public_ip
 }
 
