@@ -3,7 +3,6 @@ resource "aws_instance" "myec2" {
    instance_type   = var.instancetype
    key_name        = "devops"
    tags            = var.aws_common_tag
-   availability_zone = "${var.zone_name}"
    security_groups = ["${var.sgname}"]
 
    provisioner "local-exec" {
