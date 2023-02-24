@@ -11,52 +11,52 @@ pipeline {
     }
 	agent none
 	stages{
-	   stage('Build image') {
+	   /*stage('Build image') {
 	       agent any
            steps {
-              /*script {
+              script {
                 sh 'docker build --no-cache -f ./Dockerfile -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG .'
                 
-              }*/
+              }
            }
-	   }
+	   }*/
 	   
-	   stage('Run container based on builded image') {
+	   /*stage('Run container based on builded image') {
           agent any
           steps {
             script {
-              /*sh '''
+              sh '''
                   echo "Cleaning existing container if exist"
                   docker ps -a | grep -i $IMAGE_NAME && docker rm -f ${IMAGE_NAME}
                   docker run --name ${IMAGE_NAME} -d -p $APP_EXPOSED_PORT:$APP_CONTAINER_PORT  ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG
                   sleep 5
-              '''*/
+              '''
              }
           }
-       }
+       }*/
 	   
-	   stage('Test image') {
+	   /*stage('Test image') {
            agent any
            steps {
               script {
-                /*sh '''
+                sh '''
                    curl -I http://${HOST_IP}:${APP_EXPOSED_PORT} | grep "200"
-                '''*/
+                '''
               }
            }
-       }
+       }*/
 	   
-	   stage('Clean container') {
+	   /*stage('Clean container') {
           agent any
           steps {
              script {
-               /*sh '''
+               sh '''
                    docker stop $IMAGE_NAME
                    docker rm $IMAGE_NAME
-               '''*/
+               '''
              }
           }
-        }
+        }*/
 
 		stage ('Build EC2 on AWS with terraform') {
           agent { 
