@@ -82,7 +82,9 @@ pipeline {
                   chmod 700 ~/.aws/credentials
                   echo "Generating aws private key"
                   cp $PRIVATE_AWS_KEY devops.pem
-                  chmod 700 devops.pem
+                  chmod 777 devops.pem
+                  cp devops.pem ./terraform/
+                  cp devops.pem ./terraform/modules/ec2module/
                   cd "./terraform/app"
                   terraform init 
                   #terraform destroy --auto-approve
