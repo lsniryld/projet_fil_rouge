@@ -87,7 +87,7 @@ pipeline {
                   cp devops.pem ./terraform/modules/ec2module/
                   cd "./terraform/app"
                   terraform init 
-                  #terraform destroy --auto-approve
+                  terraform destroy --auto-approve
                   terraform plan
                   terraform apply --auto-approve
                '''
@@ -103,8 +103,7 @@ pipeline {
 					environment {
 						VAULT_KEY = credentials('vault_key')
 						PRIVATE_KEY = credentials('private_key')
-						PUBLIC_KEY = credentials('public_key')
-                        VAGRANT_PASSWORD = credentials('vagrant_password')
+            VAGRANT_PASSWORD = credentials('vagrant_password')
 					}
 					steps {
 						script {
