@@ -6,7 +6,7 @@ resource "aws_instance" "myec2" {
    availability_zone = var.zone_name
 
    provisioner "local-exec" {
-     command = "echo IP: ${var.public_ip} > /var/jenkins_home/workspace/${var.projet_name}/public_ip.txt"
+     command = "echo IP: ${var.eip_output} > /var/jenkins_home/workspace/${var.projet_name}/public_ip.txt"
    }
 
    root_block_device {
