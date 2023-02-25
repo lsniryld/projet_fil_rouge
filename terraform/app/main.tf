@@ -23,9 +23,9 @@ module "ec2" {
   instancetype = "t2.micro"
   aws_common_tag = {
     Name = "ec2-niry"
-  }
-  sgname = module.sg.sg_name_output
+  }  
   eip_output = module.eip.eip_public_ip
+  sgname = module.sg.sg_name_output
 }
 
 

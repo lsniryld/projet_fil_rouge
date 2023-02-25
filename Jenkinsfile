@@ -95,7 +95,7 @@ pipeline {
           }
         }
 		
-		stage('Deploy application ') {
+		/*stage('Deploy application ') {
 		   agent { docker { image 'registry.gitlab.com/robconnolly/docker-ansible:latest'  } }
 		   stages {
 				stage ('Prepare ansible environment') {
@@ -210,7 +210,7 @@ pipeline {
 		   
         }
 		
-    }
+    }*/
 	   
   }
 	
