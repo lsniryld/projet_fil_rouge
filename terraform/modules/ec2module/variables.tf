@@ -32,7 +32,7 @@ variable "eip_output" {
 variable "zone_name" {
   type        = string
   description = "zone name"
-  default     = "us-east-1"
+  default     = "us-east-1e"
 }
 
 variable "projet_name" {
