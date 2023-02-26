@@ -169,6 +169,7 @@ pipeline {
 								script {
 									sh '''
 										export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
+                    echo $ANSIBLE_CONFIG
 										ansible-playbook ansible/playbooks/install-docker.yml  --private-key devops.pem -l odoo_server_dev
 									'''
 								}
