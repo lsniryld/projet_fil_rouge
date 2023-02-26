@@ -75,6 +75,11 @@ pipeline {
                   echo "Generating aws credentials"
                   echo "Deleting older if exist"
                   rm -rf devops.pem ~/.aws 
+                  rm -rf /var/jenkins_home/workspace/projet_fil_rouge/public_ip.txt
+                  rm -rf /var/jenkins_home/workspace/projet_fil_rouge/ansible/host_vars/odoo_server_dev.yml
+                  rm -rf /var/jenkins_home/workspace/projet_fil_rouge/ansible/host_vars/ic_webapp_server_dev.yml
+                  rm -rf /var/jenkins_home/workspace/projet_fil_rouge/ansible/host_vars/pg_admin_server_dev.yml
+                  rm -rf 
                   mkdir -p ~/.aws
                   echo "[default]" > ~/.aws/credentials
                   echo -e "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
