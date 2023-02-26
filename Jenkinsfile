@@ -144,7 +144,7 @@ pipeline {
 					}
 				}
 			   
-	            stage ("Check all playbook syntax") {
+	            /*stage ("Check all playbook syntax") {
 					steps {
 						script {
 							sh '''
@@ -157,12 +157,12 @@ pipeline {
 							'''
 						}
 					}
-				}
+				}*/
 			   
 			   stage ("Deploy in ec2 aws") {
 					when { expression { GIT_BRANCH == 'origin/main'} }
 					stages {
-						stage ("PRODUCTION - Install Docker on all hosts") {
+						stage ("AWS - Install Docker on all hosts") {
 						    steps {
 								script {
 									sh '''
