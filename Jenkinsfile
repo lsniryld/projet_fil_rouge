@@ -139,6 +139,7 @@ pipeline {
                             apt install sshpass -y 
                             export ANSIBLE_CONFIG=$(pwd)/ansible/ansible.cfg
                             ansible all --list-hosts --private-key id_rsa  
+                            echo ${GIT_BRANCH}
 							'''
 						}
 					}
@@ -160,6 +161,7 @@ pipeline {
 				}*/
 			   
 			   stage ("Deploy in ec2 aws") {
+          
 					when { expression { GIT_BRANCH == 'origin/main'} }
 					stages {
 						stage ("AWS - Install Docker on all hosts") {
